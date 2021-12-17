@@ -1,4 +1,4 @@
-'use strict'
+// 'use strict'
 const goods = [
     { title: 'Shirt', price: 150 },
     { title: 'Socks', price: 50 },
@@ -6,17 +6,15 @@ const goods = [
     { title: 'Shoes', price: 250 },
 ];
 
-const $goodList = document.querySelector('.goods-list').innerHTML.
+// const $goodList = document.querySelector('.goods-list')
 
 const renderGoodsItem = (title, price) => {
     return `<div class="goods-item"><h3>${title}</h3><p>${price}</p></div>`;
 };
 
-const renderGoodsList = (list) => {
-    let goodsList = list.map(item => renderGoodsItem(item.title, item.price)).join();
-    // document.querySelector('.goods-list').insertAdjacentHTML('beforeend', goodsList);
-    // document.getElementsByClassName('goods-list').insertAdjacentHTML('beforeend', goodsList);
-    document.querySelector('.goods-list').innerHTML = goodsList;
+const renderGoodsList = (list = goods) => {
+    let goodsList = list.map(item => renderGoodsItem(item.title, item.price)).join('');
+    document.querySelector('.goods-list').innerHTML
 }
 
 renderGoodsList(goods);
