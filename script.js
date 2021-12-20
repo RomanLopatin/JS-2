@@ -4,6 +4,10 @@ const goods = [
     { title: 'Socks', price: 50 },
     { title: 'Jacket', price: 350 },
     { title: 'Shoes', price: 250 },
+    { title: 'Shirt', price: 150 },
+    { title: 'Socks', price: 50 },
+    { title: 'Jacket', price: 350 },
+    { title: 'Shoes', price: 250 },
 ];
 
 const _goodList = document.querySelector('.goods-list');

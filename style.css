@@ -1,0 +1,36 @@
+
+.header {
+    background: lightblue;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.cart-button {
+     background: lightgray;
+     padding: 3px;
+}
+
+.goods-list {
+   background: whitesmoke;
+   border: 3px solid black; 
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+}
+
+.goods-item {
+    background: lightgreen;
+   border: 1px solid black; 
+   display: flex;
+   flex-direction: column;
+   padding: 44px 32px;
+   width: 50px;
+   height: 50px;
+   align-items: center;
+   margin: 10px;
+   
+}
+
+
