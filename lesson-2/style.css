@@ -34,8 +34,33 @@
    height: 50px;
    align-items: center;
    margin: 10px;
-   border-radius: 5px;
-   
+   border-radius: 5px; 
 }
+
+.goods-list-cart {
+   background: lightskyblue;
+   border: 1px solid rgba(0, 0, 0, 0.664); 
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+   margin: 3px 22px;
+   border-radius: 5px;
+}
+
+.goods-item-cart {
+    background: #4caf50;
+   border: 1px solid black; 
+   display: flex;
+   flex-direction: column;
+   padding: 44px 32px;
+   width: 100px;
+   height: 100px;
+   align-items: center;
+   margin: 10px;
+   border-radius: 5px; 
+   justify-content: space-around
+}
+
+
 
 

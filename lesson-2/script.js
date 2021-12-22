@@ -42,6 +42,19 @@ class GoodRender {
     }
 }
 
+class CartGoodRender {
+    constructor({ title, price }, count) {
+        this.title = title;
+        this.price = price;
+        this.count = count;
+    }
+
+    render() {
+        return `<div class="goods-item-cart"><h3>${this.title}</h3><p>Цена: ${this.price}</p><p> Количество: ${this.count} шт.</p></div>`;
+    }
+}
+
+
 
 class GoodStack {
     constructor(good) {
@@ -146,7 +159,23 @@ class GoodsListRender {
             const GoodRenderObj = new GoodRender(item);
             listHtml += GoodRenderObj.render();
         });
-        // document.querySelector('.goods-list').innerHTML = listHtml;
+        document.querySelector('.goods-list').innerHTML = listHtml;
+        return listHtml
+    }
+}
+
+class CartGoodsListRender {
+    constructor(list) {
+        this.list = list;
+    }
+
+    renderGoodsList() {
+        let listHtml = '';
+        this.list.forEach(item => {
+            const GoodRenderObj = new CartGoodRender(item.good, item.count);
+            listHtml += GoodRenderObj.render();
+        });
+        document.querySelector('.goods-list-cart').innerHTML = listHtml;
         return listHtml
     }
 }
@@ -164,13 +193,15 @@ showcase.addToCart(1)
 showcase.addToCart(3)
 
 cart.remove(1)
+//
+console.log(showcase, cart)
+//
 
 //
 const ShowcaseRender = new GoodsListRender(showcase.list);
 ShowcaseRender.renderGoodsList();
-ShowCaselistHtml = ShowcaseRender.renderGoodsList();
-document.querySelector('.goods-list').innerHTML = ShowCaselistHtml;
-
-
+//
+const CartRender = new CartGoodsListRender(cart.list);
+CartRender.renderGoodsList();
 
 
