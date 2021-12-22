@@ -38,19 +38,18 @@ class GoodRender {
     }
 
     render() {
-        return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p></div>`;
+        return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price} руб.</p></div>`;
     }
 }
 
-class CartGoodRender {
+class CartGoodRender extends GoodRender {
     constructor({ title, price }, count) {
-        this.title = title;
-        this.price = price;
+        super({ title, price })
         this.count = count;
     }
 
     render() {
-        return `<div class="goods-item-cart"><h3>${this.title}</h3><p>Цена: ${this.price}</p><p> Количество: ${this.count} шт.</p></div>`;
+        return `<div class="goods-item-cart"><h3>${this.title}</h3><p>Цена: ${this.price} руб.</p><p> Количество: ${this.count} шт.</p></div>`;
     }
 }
 
