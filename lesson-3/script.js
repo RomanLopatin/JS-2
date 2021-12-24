@@ -1,4 +1,5 @@
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/';
+//
 
 function send(onError, onSuccess, url, method = 'GET', data = '', headers = {}, timeout = 60000) {
 
@@ -132,6 +133,23 @@ class Cart {
     constructor() {
         this.list = []
     }
+    _onSuccess(response) {
+        const data = JSON.parse(response)
+        data.contents.forEach(item => {
+            this.list.push(
+                new GoodStack({ id: item.id_product, title: item.product_name, price: item.price, count: item.quantity })
+            )
+        });
+    }
+
+    _onError(err) {
+        console.log(err);
+    }
+
+
+    fetchBasket() {
+        send(this._onError, this._onSuccess.bind(this), `${API_URL}getBasket.json`)
+    }
 
     add(good) {
         const idx = this.list.findIndex((stack) => stack.getGoodId() == good.id)
@@ -181,13 +199,7 @@ class Showcase {
         send(this._onError, this._onSuccess.bind(this), `${API_URL}catalogData.json`)
     }
 
-    // fetchGoods() {
-    //     this.list = [
-    //         new Good({ id: 1, title: 'Футболка', price: 140 }),
-    //         new Good({ id: 2, title: 'Брюки', price: 320 }),
-    //         new Good({ id: 3, title: 'Галстук', price: 24 })
-    //     ]
-    // }
+
 
     addToCart(id) {
         const idx = this.list.findIndex((good) => id == good.id)
@@ -197,14 +209,6 @@ class Showcase {
         }
     }
 
-    // renderShowcase() {
-    //     let listHtml = '';
-    //     this.list.forEach(item => {
-    //         const GoodRenderObj = new GoodRender(item);
-    //         listHtml += GoodRenderObj.render();
-    //     });
-    //     document.querySelector('.goods-list').innerHTML = listHtml;
-    // }
 }
 
 class GoodsListRender {
@@ -242,22 +246,19 @@ class CartGoodsListRender {
 
 
 const cart = new Cart()
+
+
 const showcase = new Showcase(cart)
+//забираем витрину с сервера
 showcase.fetchGoods();
+//забираем корзину с сервера
+cart.fetchBasket();
 
 setTimeout(() => {
-    showcase.addToCart(123)
-    showcase.addToCart(123)
-    showcase.addToCart(123)
-    showcase.addToCart(456)
-
-    cart.remove(123)
-
-    //вывод в консоль и отрисовка
-    console.log(showcase, cart)
+    //отрисовка витрины
     const ShowcaseRender = new GoodsListRender(showcase.list);
     ShowcaseRender.renderGoodsList();
-    //
+    //отрисовка карзины
     const CartRender = new CartGoodsListRender(cart.list);
     CartRender.renderGoodsList();
 }, 1000)
