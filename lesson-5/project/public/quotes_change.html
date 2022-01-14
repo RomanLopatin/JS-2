@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <button id="change_quotes_btn">Заменить кавычки</button>
+</head>
+
+<body>
+    <div id="my_text">
+        2021 Was a Big Year in Orbit and Beyond
+        2021’s Most Fascinating Animals
+        You Don’t Need a Spaceship to Grow ‘Weird Little’ Martian Radishes
+        my brothers' room
+    </div>
+    <script>
+        function change_quote() {
+            targetElement = document.querySelector('#my_text');
+            //const search = new RegExp('\B([‘’])[\ a-z0-9_\.-]+([’])\B', 'igm');//! ТАКАЯ ЗАПИСЬ ПОЧЕМУ-ТО НЕ РАБОТАЕТ!??
+            const search = /\B['‘’](.+)['‘’]\B/igm;
+            targetElement.innerHTML = targetElement.innerHTML.replace(search, '"$1"');
+        }
+        changeBtn = document.querySelector("#change_quotes_btn");
+        changeBtn.addEventListener('click', change_quote);
+    </script>
+</body>
+
+</html>
