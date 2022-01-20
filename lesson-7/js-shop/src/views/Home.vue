@@ -18,7 +18,12 @@
       v-on:cart-card-button-pushed="delFromCart"
     >
     </cart>
-    <custom_input v-on:input="searchFilter"></custom_input>
+    <connectionErrorMessage
+      v-if="isServerConnectionError"
+      v-on:connectionErrorMessageClose="this.isServerConnectionError = false"
+      :connError="this.connectionErrorStatus"
+    >
+    </connectionErrorMessage>
   </div>
 </template>
 
@@ -29,6 +34,7 @@ const API_URL = "/api/v1";
 import cart from "../components/cart.vue";
 import search from "../components/search.vue";
 import showcase from "../components/showcase.vue";
+import connectionErrorMessage from "../components/connectionErrorMessage.vue";
 
 export default {
   name: "Home",
@@ -36,6 +42,7 @@ export default {
     cart,
     showcase,
     search,
+    connectionErrorMessage,
   },
   data() {
     return {
@@ -43,9 +50,15 @@ export default {
       showcase_filtered: [],
       cart: [],
       isCartVisible: false,
+      isServerConnectionError: false,
+      connectionErrorStatus: 0,
     };
   },
   methods: {
+    onServerConnectionEror(connError) {
+      this.isServerConnectionError = true;
+      this.connectionErrorStatus = connError;
+    },
     searchFilter(searchInput) {
       // console.log("searchButtonPushed", searchInput);
       const search = new RegExp(searchInput, "gi");
@@ -66,11 +79,15 @@ export default {
         },
         body: JSON.stringify(productToAdd),
       }).then((res) => {
-        console.log("addToCart", res.status);
         if (res.status === 201) {
           this.cart.push(productToAdd);
+        } else {
+          console.log("addToCart", res.status);
+          // this.isServerConnectionError = true;
+          this.onServerConnectionEror(res.status);
         }
       });
+      // .catch((err) => alert(err));
       // }
     },
     delFromCart(card_id) {
@@ -83,30 +100,53 @@ export default {
         },
         body: JSON.stringify(this.cart[idxToDel]),
       }).then((res) => {
-        console.log("delFromCart", res.status);
         if (res.status === 200) {
           this.cart.splice(idxToDel, 1);
+        } else {
+          console.log("delFromCart", res.status);
+          // this.isServerConnectionError = true;
+          this.onServerConnectionEror(res.status);
         }
       });
+      // .catch((err) => alert(err));
     },
   },
   mounted() {
     fetch(`${API_URL}/cart`)
       .then((res) => {
-        console.log("1. mounted", res.status);
-        return res.json();
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          console.log("mounted cart", res.status);
+          // this.isServerConnectionError = true;
+          this.onServerConnectionEror(res.status);
+        }
       })
       .then((data) => {
         this.cart = data;
-      });
+      })
+      .catch((err) => alert(err));
     fetch(`${API_URL}/showcase`)
       .then((res) => {
-        console.log("2.mounted", res.status);
-        return res.json();
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          console.log("mounted showcase", res.status);
+          // this.isServerConnectionError = true;
+          this.onServerConnectionEror(res.status);
+        }
+      })
+      .catch((err) => {
+        alert(err);
+        console.log("mounted catch 1", err);
       })
       .then((data) => {
         this.showcase = data;
         this.showcase_filtered = this.showcase;
+      })
+      .catch((err) => {
+        alert(err);
+        console.log("mounted catch 2", err);
       });
   },
 };
