@@ -2,10 +2,12 @@ const API_URL = 'http://localhost:3000/api/v1'
 
 new Vue({
     el: "#app",
-    data: {
-        showcase: [],
-        cart: [],
-        isCartVisible: false
+    data() {
+        return {
+            showcase: [],
+            cart: [],
+            isCartVisible: false
+        }
     },
     methods: {
         onCartOpen() {

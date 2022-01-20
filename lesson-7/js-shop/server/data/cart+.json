@@ -1,0 +1,20 @@
+[
+    {
+        "amount": 46600,
+        "countGoods": 2,
+        "contents": [
+            {
+                "id_product": 12345,
+                "product_name": "Ноут",
+                "price": 45600,
+                "quantity": 1
+            },
+            {
+                "id_product": 45667,
+                "product_name": "Мыша",
+                "price": 1000,
+                "quantity": 1
+            }
+        ]
+    }
+]
