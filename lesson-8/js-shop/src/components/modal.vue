@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <button v-on:click="onClick">close</button>
+    <!-- <button class="cart_btn_in" v-on:click="onClick">close</button> -->
     <div class="cart-list">
       <card
         v-for="item of list"
@@ -39,16 +39,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal {
+.cart-list {
   /* display: none; */
-  width: 800px;
-  min-height: 600px;
-  position: absolute;
-  top: 100px;
-  left: calc(50% - 400px);
-  border: 1px solid #ccc;
-  background-color: white;
+  background: lightskyblue;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 3px 22px;
+  border-radius: 5px;
+}
+.cart_btn_in {
+  background: lightblue;
+  padding: 3px;
   border-radius: 3px;
-  padding: 20px;
 }
 </style>

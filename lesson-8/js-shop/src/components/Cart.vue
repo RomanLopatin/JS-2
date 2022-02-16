@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-list">
+  <div class="goods-list-cart">
     <card
       v-for="item of list"
       v-bind:key="item.id_product"
@@ -30,3 +30,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.goods-list-cart {
+  background: lightskyblue;
+  border: 1px solid rgba(0, 0, 0, 0.664);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 3px 22px;
+  border-radius: 5px;
+}
+</style>

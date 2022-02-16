@@ -30,3 +30,20 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.goods-list {
+  background: #8bc34a;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 3px 22px;
+  border-radius: 5px;
+}
+#search_btn {
+  background: #ff572282;
+  padding: 3px;
+  border-radius: 3px;
+}
+</style>

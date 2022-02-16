@@ -1,6 +1,9 @@
 <template>
-  <input type="text" v-model="searchInput" />
-  <button id="search_btn" v-on:click="onClick">Поиск</button>
+  <br />
+  <div>
+    <input type="text" class="search_field" v-model="searchInput" />
+    <button class="search_btn" v-on:click="onClick">Поиск</button>
+  </div>
 </template>
 
 <script>
@@ -25,4 +28,14 @@ export default {
 </script>
 
 <style lang="scss">
+.search_btn {
+  background: #ff572282;
+  padding: 3px;
+  border-radius: 3px;
+}
+.search_field {
+  background: lightgray;
+  padding: 3px;
+  border-radius: 3px;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header>
-      <h1>Cart</h1>
+      <h3>Корзина</h3>
     </header>
     <main>
       <cart> </cart>

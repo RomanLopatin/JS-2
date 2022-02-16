@@ -1,13 +1,17 @@
 <template>
   <div class="home">
     <header>
-      <search v-on:searchButtonPushed="searchFilter"></search>
-      <br /><br />
-      <button v-on:click="onCartOpen" type="button">Корзина</button>
+      <h3>Витрина</h3>
     </header>
     <main>
       <showcase> </showcase>
     </main>
+    <div class="low_menu">
+      <search v-on:searchButtonPushed="searchFilter"></search>
+      <button class="cart_btn" v-on:click="onCartOpen" type="button">
+        Корзина
+      </button>
+    </div>
     <cart
       v-if="isCartVisible"
       :list="cart"
@@ -60,3 +64,20 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.cart_btn {
+  background: lightblue;
+  padding: 3px;
+  border-radius: 3px;
+  margin-left: 50px;
+}
+.low_menu {
+  background: lightcyan;
+  padding: 15px;
+  // border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+</style>
